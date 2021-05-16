@@ -9,6 +9,4 @@ import java.util.Optional;
 @Repository
 public interface TravelRepository extends JpaRepository<Travel, Long> {
 
-    Optional<Travel> findByTravelName(String travelName);
-
 }
