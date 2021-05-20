@@ -1,12 +1,13 @@
 package hr.zubcic.travelapp.controllers;
 
 import hr.zubcic.travelapp.dto.TravelDTO;
+import hr.zubcic.travelapp.dto.command.TravelCommand;
 import hr.zubcic.travelapp.services.TravelService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,8 +25,23 @@ public class TravelController {
         return travelService.findAll();
     }
 
-    @GetMapping("/{travelName}")
-    public TravelDTO getTravelByName(@PathVariable final String travelName) {
-        return travelService.findByTravelName(travelName);
+    @GetMapping("/{id}")
+    public TravelDTO getTravelByName(@PathVariable final Long id) {
+        return travelService.findByTravelId(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TravelDTO> update(@PathVariable Long id, @Valid @RequestBody final TravelCommand updateTravel) {
+        return travelService.update(id, updateTravel)
+                .map(ResponseEntity::ok)
+                .orElseGet(
+                        () -> ResponseEntity.notFound().build()
+                );
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        travelService.deleteTravel(id);
     }
 }
