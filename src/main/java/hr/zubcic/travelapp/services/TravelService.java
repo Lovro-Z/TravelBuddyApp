@@ -1,7 +1,7 @@
 package hr.zubcic.travelapp.services;
 
 import hr.zubcic.travelapp.dto.TravelDTO;
-import hr.zubcic.travelapp.model.Travel;
+import hr.zubcic.travelapp.dto.command.TravelCommand;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +14,7 @@ public interface TravelService {
 
     TravelDTO findByTravelId(Long id);
 
-    //TODO add travelCommand with valdation(add validation dependency)
-    Optional<TravelDTO> update(Long id, Travel updateTravel);
+    Optional<TravelDTO> update(Long id, TravelCommand updateTravel);
 
     void deleteTravel(Long id);
 }

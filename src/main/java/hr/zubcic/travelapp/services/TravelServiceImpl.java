@@ -1,6 +1,7 @@
 package hr.zubcic.travelapp.services;
 
 import hr.zubcic.travelapp.dto.TravelDTO;
+import hr.zubcic.travelapp.dto.command.TravelCommand;
 import hr.zubcic.travelapp.model.Travel;
 import hr.zubcic.travelapp.repositories.TravelRepository;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class TravelServiceImpl implements TravelService {
 
     @Override
     @Transactional
-    public Optional<TravelDTO> update(Long id, Travel updateTravel) {
+    public Optional<TravelDTO> update(Long id, TravelCommand updateTravel) {
         Travel travelToUpdate = travelRepository.findById(id).orElse(null);
         if (travelToUpdate != null) {
             travelToUpdate.setTravelName(updateTravel.getTravelName());

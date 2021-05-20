@@ -1,12 +1,13 @@
 package hr.zubcic.travelapp.controllers;
 
 import hr.zubcic.travelapp.dto.TravelDTO;
-import hr.zubcic.travelapp.model.Travel;
+import hr.zubcic.travelapp.dto.command.TravelCommand;
 import hr.zubcic.travelapp.services.TravelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ public class TravelController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TravelDTO> update(@PathVariable Long id, @RequestBody final Travel updateTravel) {
+    public ResponseEntity<TravelDTO> update(@PathVariable Long id, @Valid @RequestBody final TravelCommand updateTravel) {
         return travelService.update(id, updateTravel)
                 .map(ResponseEntity::ok)
                 .orElseGet(
