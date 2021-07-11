@@ -17,21 +17,15 @@ const StyledContainer = styled.div`
 
 const StyledUl = styled.ul`
   width: 50%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-item: center;
   margin-bottom: 0;
   list-style: none;
-
-  @media (min-width: 600px) {
-    width: 40%;
-  }
-
-  @media (min-width: 995px) {
-    width: 30%;
-  }
 `;
+
+const liStyle = {
+  cursor: "pointer",
+  float: "right",
+  margin: "0 16px",
+};
 
 const linkStyle = {
   textDecoration: "none",
@@ -49,9 +43,9 @@ const Header = () => {
         </h1>
 
         <StyledUl>
-          <li>Agencies</li>
-          <li>About</li>
-          <li>Log in</li>
+          <li style={liStyle}>Log in</li>
+          <li style={liStyle}>About</li>
+          <li style={liStyle}>Agencies</li>
         </StyledUl>
       </StyledContainer>
     </StyledHeader>
