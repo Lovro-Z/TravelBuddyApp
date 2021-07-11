@@ -51,6 +51,6 @@ public class TravelServiceImpl implements TravelService {
     }
 
     private TravelDTO mapTravelToDTO(final Travel travel) {
-        return new TravelDTO(travel.getTravelName(), travel.getShortDescription(), travel.getPrice(), travel.getSpaceLeft());
+        return new TravelDTO(travel.getId(), travel.getTravelName(), travel.getShortDescription(), travel.getPrice(), travel.getSpaceLeft());
     }
 }
