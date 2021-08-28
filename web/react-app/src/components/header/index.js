@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import { authenticationService } from "../../services/authentication.service";
+
 const StyledHeader = styled.header`
   display: felx;
   align-items: center;
@@ -32,7 +34,7 @@ const linkStyle = {
   color: "white",
 };
 
-const Header = () => {
+const Header = ({ currentUser }) => {
   return (
     <StyledHeader className="p-3">
       <StyledContainer className="d-flex container">
@@ -43,8 +45,30 @@ const Header = () => {
         </h1>
 
         <StyledUl>
-          <li style={liStyle}>Log in</li>
-          <li style={liStyle}>About</li>
+          {currentUser ? (
+            <li style={liStyle}>
+              <Link
+                to="/travels"
+                style={linkStyle}
+                onClick={authenticationService.logout}
+              >
+                Log out
+              </Link>
+            </li>
+          ) : (
+            <li style={liStyle}>
+              <Link style={linkStyle} to="/login">
+                Log in
+              </Link>
+            </li>
+          )}
+          {currentUser && (
+            <li style={liStyle}>
+              <Link style={linkStyle} to="/profile">
+                My profile
+              </Link>
+            </li>
+          )}
           <li style={liStyle}>Agencies</li>
         </StyledUl>
       </StyledContainer>

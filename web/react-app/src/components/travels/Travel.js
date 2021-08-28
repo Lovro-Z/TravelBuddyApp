@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -14,17 +14,18 @@ const DateAndSpace = styled.p`
 // TODO: more properties(date, trip agenda, recomendations...)
 const Travel = () => {
   let { id } = useParams();
-  useEffect(() => {
-    fetchTravel();
-  }, []);
 
   const [travel, setTravel] = useState([]);
 
-  const fetchTravel = async () => {
+  const fetchTravel = useCallback(async () => {
     const fetchedTravel = await fetch(`http://localhost:8080/travel/${id}`);
     const travel = await fetchedTravel.json();
     setTravel(travel);
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchTravel();
+  }, [fetchTravel]);
 
   return (
     <div className="container mb-4">
