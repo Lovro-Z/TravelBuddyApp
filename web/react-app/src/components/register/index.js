@@ -1,67 +1,55 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import * as Yup from "yup";
 
 import { userService } from "../../services/user.service";
 
-const CardGrid = styled.div`
-  display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: repeat(3, 1fr);
+const RegisterForm = styled.div`
+  margin: 0 auto;
+
+  @media (min-width: 995px) {
+    width: 40%;
+  }
 `;
 
-const Profile = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
-  const fetchUser = async () => {
-    const fetchedUser = await userService.getUser();
-    const user = await fetchedUser;
-
-    setUser(user);
-  };
+const Register = () => {
+  const history = useHistory();
 
   return (
-    <div className="container my-4">
-      <h2>
-        Welcome to your profile, {user?.firstName} {user?.lastName}!
-      </h2>
-      <hr />
-      <h3>Your personal information</h3>
+    <RegisterForm className="container my-3">
+      <h2>Register</h2>
       <Formik
         initialValues={{
-          username: user?.username,
-          firstName: user?.firstName,
-          lastName: user?.lastName,
+          username: "",
+          password: "",
+          firstName: "",
+          lastName: "",
         }}
         validationSchema={Yup.object().shape({
           username: Yup.string().required("Username is required"),
+          password: Yup.string().required("Password is required"),
           firstName: Yup.string().required("First name is required"),
           lastName: Yup.string().required("Last name is required"),
         })}
-        onSubmit={({ username, firstName, lastName }, { setSubmitting }) => {
-          userService
-            .updateUser(user.id, username, "hack", firstName, lastName)
-            .then(
-              (user) => {
-                setSubmitting(false);
-                setUser(user);
-              },
-              (error) => {
-                setSubmitting(false);
-              }
-            );
+        onSubmit={(
+          { username, password, firstName, lastName },
+          { setStatus, setSubmitting }
+        ) => {
+          userService.addUser(username, password, firstName, lastName).then(
+            (user) => {
+              const { form } = { form: { pathname: "/login" } };
+              history.push(form);
+            },
+            (error) => {
+              setSubmitting(false);
+              setStatus(error);
+            }
+          );
         }}
-        enableReinitialize
       >
         {({ errors, status, touched, isSubmitting }) => (
-          <Form style={{ width: "50%" }}>
+          <Form>
             <div className="form-group">
               <label htmlFor="username">Username</label>
               <Field
@@ -71,13 +59,25 @@ const Profile = () => {
                   "form-control" +
                   (errors.username && touched.username ? " is-invalid" : "")
                 }
-                disabled
               />
-              <p style={{ color: "gray" }}>
-                Only administrator can edit username
-              </p>
               <ErrorMessage
                 name="username"
+                component="div"
+                className="invalid-feedback"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <Field
+                name="password"
+                type="password"
+                className={
+                  "form-control" +
+                  (errors.password && touched.password ? " is-invalid" : "")
+                }
+              />
+              <ErrorMessage
+                name="password"
                 component="div"
                 className="invalid-feedback"
               />
@@ -120,8 +120,11 @@ const Profile = () => {
                 className="btn btn-primary my-2"
                 disabled={isSubmitting}
               >
-                Update
+                Register
               </button>
+              <Link className="btn btn-success mx-3" to="/login">
+                Back to Login
+              </Link>
               {isSubmitting && (
                 <img
                   alt="loading"
@@ -133,41 +136,8 @@ const Profile = () => {
           </Form>
         )}
       </Formik>
-      <hr />
-      <h3 className="mb-4">Your travels</h3>
-
-      {user?.username === "johndoe" ? (
-        <CardGrid>
-          <Card>
-            <Card.Img
-              variant="top"
-              src="https://static.independent.co.uk/2021/03/11/13/iStock-1185953092.jpg?width=982&height=726&auto=webp&quality=75"
-              style={{ height: "218px" }}
-            />
-            <Card.Body>
-              <Card.Title>Travel to France</Card.Title>
-              <Card.Text>
-                Travel to one of the most famous and romantic countries in
-                Europe, la France!
-              </Card.Text>
-              <Card.Text style={{ color: "gray" }}>1300€ | 🚌</Card.Text>
-              <Link to={`localhost:3000/5`}>
-                <button className="btn btn-primary mr-3">Read more</button>
-              </Link>
-              <button className="btn btn-danger">Cancel reservation</button>
-            </Card.Body>
-          </Card>
-        </CardGrid>
-      ) : (
-        <>
-          <p>You currently don't have any travels.</p>
-          <Link to="/travels" class="btn btn-success">
-            Search travels
-          </Link>
-        </>
-      )}
-    </div>
+    </RegisterForm>
   );
 };
 
-export default Profile;
+export default Register;

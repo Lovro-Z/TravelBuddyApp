@@ -1,19 +1,18 @@
 package hr.zubcic.travelapp.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Travel {
 
-    public Travel(Long id, String travelName, String shortDescription, float price, int spaceLeft) {
-        this.id = id;
+    public Travel(String travelName, String shortDescription, String description, float price, int spaceLeft, TransportType transportation, String imageURL) {
         this.travelName = travelName;
         this.shortDescription = shortDescription;
+        this.description = description;
         this.price = price;
         this.spaceLeft = spaceLeft;
+        this.transportation = transportation;
+        this.imageURL = imageURL;
     }
 
     public Travel() {
@@ -29,11 +28,21 @@ public class Travel {
     @Column(name = "short_description")
     private String shortDescription;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "price")
     private float price;
 
     @Column(name = "space_left")
     private int spaceLeft;
+
+    @Column(name = "transportation")
+    @Enumerated(EnumType.STRING)
+    private TransportType transportation;
+
+    @Column(name = "image_url")
+    private String imageURL;
 
     public Long getId() {
         return id;
@@ -59,6 +68,14 @@ public class Travel {
         this.shortDescription = shortDescription;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public float getPrice() {
         return price;
     }
@@ -75,14 +92,33 @@ public class Travel {
         this.spaceLeft = spaceLeft;
     }
 
+    public TransportType getTransportation() {
+        return transportation;
+    }
+
+    public void setTransportation(TransportType transportation) {
+        this.transportation = transportation;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
     @Override
     public String toString() {
         return "Travel{" +
                 "id=" + id +
                 ", travelName='" + travelName + '\'' +
                 ", shortDescription='" + shortDescription + '\'' +
+                ", description='" + description + '\'' +
                 ", price=" + price +
                 ", spaceLeft=" + spaceLeft +
+                ", transportation=" + transportation +
+                ", imageURL='" + imageURL + '\'' +
                 '}';
     }
 }

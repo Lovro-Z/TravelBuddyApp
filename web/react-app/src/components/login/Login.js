@@ -1,5 +1,5 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import * as Yup from "yup";
 
@@ -82,11 +82,14 @@ const Login = () => {
             <div className="form-group">
               <button
                 type="submit"
-                className="btn btn-primary"
+                className="btn btn-primary my-2"
                 disabled={isSubmitting}
               >
                 Login
               </button>
+              <Link className="btn btn-success mx-3" to="/registration">
+                Register
+              </Link>
               {isSubmitting && (
                 <img
                   alt="loading"

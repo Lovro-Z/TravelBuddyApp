@@ -1,20 +1,48 @@
+import jwtDecode from "jwt-decode";
 import { Button, Card } from "react-bootstrap";
 import { Link, useRouteMatch } from "react-router-dom";
 
-const TravelItem = ({ travel }) => {
+const TravelItem = ({ travel, deleteTravel }) => {
   let match = useRouteMatch();
+
+  const token = localStorage.getItem("token");
+  let user;
+  if (token) {
+    user = jwtDecode(token);
+  }
+
   return (
     <Card>
       <Card.Img
         variant="top"
-        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3VtbWVyJTIwYmVhY2h8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"
+        src={travel?.imageUrl}
+        style={{ height: "218px" }}
       />
       <Card.Body>
         <Card.Title>{travel.travelName}</Card.Title>
         <Card.Text>{travel.shortDescription}</Card.Text>
+        <Card.Text style={{ color: "gray" }}>
+          {travel.price}€ | {travel.transportation === "BUS" && "  🚌"}
+          {travel.transportation === "PLANE" && "  ✈️"}
+          {travel.transportation === "TRAIN" && "  🚂"}
+        </Card.Text>
         <Link to={`${match.path}/${travel.id}`}>
           <Button variant="primary">Read more</Button>
         </Link>
+        {user?.auth === "ROLE_ADMIN" && (
+          <>
+            <Link to={`/admin/${travel.id}`} className="ml-2">
+              <Button variant="warning">Edit travel</Button>
+            </Link>
+            <Button
+              onClick={() => deleteTravel(travel.id)}
+              variant="danger"
+              className="ml-2"
+            >
+              Delete
+            </Button>
+          </>
+        )}
       </Card.Body>
     </Card>
   );

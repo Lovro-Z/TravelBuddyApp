@@ -12,6 +12,9 @@ import Travel from "./components/travels/Travel";
 import { authenticationService } from "./services/authentication.service";
 import Login from "./components/login/Login";
 import Profile from "./components/profile";
+import Register from "./components/register";
+import Home from "./components/home";
+import { Admin } from "./components/admin";
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
@@ -27,10 +30,13 @@ function App() {
         <Header currentUser={currentUser} />
 
         <Switch>
+          <Route path="/" exact component={Home} />
           <Route path="/travels" exact component={Travels} />
           <Route path="/travels/:id" component={Travel} />
           <Route path="/login" component={Login} />
+          <Route path="/registration" component={Register} />
           <Route path="/profile" component={Profile} />
+          <Route path="/admin" component={Admin} />
         </Switch>
       </div>
     </Router>

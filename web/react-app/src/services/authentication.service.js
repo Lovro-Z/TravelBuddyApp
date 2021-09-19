@@ -23,9 +23,9 @@ const handleResponse = (response) => {
         logout();
         // window.location.reload();
       }
-
+      // TODO: handle bad username already exists response
       if (data?.apierror?.message === "Bad credentials") {
-        return Promise.reject("Wrong username or password");
+        return Promise.reject("Incorrect username or password");
       }
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);
@@ -62,6 +62,7 @@ export const authenticationService = {
   login,
   logout,
   authHeader,
+  handleResponse,
   currentUser: currentUserSubject.asObservable(),
   get currentUserValue() {
     return currentUserSubject.value;

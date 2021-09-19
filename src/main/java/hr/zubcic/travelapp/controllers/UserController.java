@@ -1,14 +1,14 @@
 package hr.zubcic.travelapp.controllers;
 
 import hr.zubcic.travelapp.dto.UserDTO;
+import hr.zubcic.travelapp.dto.command.UserCommand;
 import hr.zubcic.travelapp.security.SecurityUtils;
 import hr.zubcic.travelapp.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/user")
@@ -33,6 +33,30 @@ public class UserController {
                 )
                 .orElseGet(
                         () -> ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build()
+                );
+    }
+
+    @PostMapping
+    public ResponseEntity<UserDTO> save(@Valid @RequestBody final UserCommand command) {
+        return userService.save(command)
+                .map(
+                        userDTO -> ResponseEntity
+                                .status(HttpStatus.CREATED)
+                                .body(userDTO)
+                )
+                .orElseGet(
+                        () -> ResponseEntity
+                                .status(HttpStatus.CONFLICT)
+                                .build()
+                );
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody final UserCommand userCommand) {
+        return userService.update(id, userCommand)
+                .map(ResponseEntity::ok)
+                .orElseGet(
+                        () -> ResponseEntity.notFound().build()
                 );
     }
 
