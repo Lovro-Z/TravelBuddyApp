@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import TravelItem from "./TravelItem";
 import styled from "styled-components";
+import Filter from "../filter";
+import { travelService } from "../../services/travel.service";
 
 const CardGrid = styled.div`
   margin: 0 auto;
@@ -17,11 +19,11 @@ const CardGrid = styled.div`
 `;
 
 const TravelsList = () => {
+  const [travels, setTravels] = useState([]);
+
   useEffect(() => {
     fetchTravels();
   }, []);
-
-  const [travels, setTravels] = useState([]);
 
   const fetchTravels = async () => {
     const fetchedTravels = await fetch("http://localhost:8080/travel");
@@ -30,11 +32,21 @@ const TravelsList = () => {
     setTravels(travels);
   };
 
+  const deleteTravel = async (id) => {
+    await travelService.deleteTravel(id);
+    fetchTravels();
+  };
+
   return (
     <div className="container my-4">
+      <Filter setTravels={setTravels} />
       <CardGrid>
         {travels?.map((travel) => (
-          <TravelItem key={travel.id} travel={travel} />
+          <TravelItem
+            key={travel.id}
+            travel={travel}
+            deleteTravel={deleteTravel}
+          />
         ))}
       </CardGrid>
     </div>

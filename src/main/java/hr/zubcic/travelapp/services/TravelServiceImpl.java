@@ -2,6 +2,7 @@ package hr.zubcic.travelapp.services;
 
 import hr.zubcic.travelapp.dto.TravelDTO;
 import hr.zubcic.travelapp.dto.command.TravelCommand;
+import hr.zubcic.travelapp.model.TransportType;
 import hr.zubcic.travelapp.model.Travel;
 import hr.zubcic.travelapp.repositories.TravelRepository;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,12 @@ public class TravelServiceImpl implements TravelService {
     }
 
     @Override
+    public Optional<TravelDTO> save(final TravelCommand command) {
+        Travel travel = travelRepository.save(mapCommandToTravel(command));
+        return Optional.of(mapTravelToDTO(travel));
+    }
+
+    @Override
     @Transactional
     public Optional<TravelDTO> update(Long id, TravelCommand updateTravel) {
         Travel travelToUpdate = travelRepository.findById(id).orElse(null);
@@ -39,6 +46,9 @@ public class TravelServiceImpl implements TravelService {
             travelToUpdate.setShortDescription(updateTravel.getShortDescription());
             travelToUpdate.setPrice(updateTravel.getPrice());
             travelToUpdate.setSpaceLeft(updateTravel.getSpaceLeft());
+            travelToUpdate.setTransportation(updateTravel.getTransportation());
+            travelToUpdate.setDescription(updateTravel.getDescription());
+            travelToUpdate.setImageURL(updateTravel.getImageURL());
             return Optional.of(mapTravelToDTO(travelToUpdate));
         }
         return Optional.empty();
@@ -50,7 +60,21 @@ public class TravelServiceImpl implements TravelService {
         travelRepository.delete(travel);
     }
 
+    @Override
+    public List<TravelDTO> filterTravels(String text, Double price, TransportType transportation) {
+        return travelRepository.findAll().stream()
+                .filter(travel -> (text == null || (!text.isBlank()) && (travel.getTravelName().contains(text) || travel.getShortDescription().contains(text) || travel.getDescription().contains(text))))
+                .filter(travel -> (price == null) || (price > 0 && travel.getPrice() <= price))
+                .filter(travel -> ((transportation == null) || (transportation.equals(travel.getTransportation()))))
+                .map(this::mapTravelToDTO)
+                .collect(Collectors.toList());
+    }
+
     private TravelDTO mapTravelToDTO(final Travel travel) {
-        return new TravelDTO(travel.getId(), travel.getTravelName(), travel.getShortDescription(), travel.getPrice(), travel.getSpaceLeft());
+        return new TravelDTO(travel.getId(), travel.getTravelName(), travel.getShortDescription(), travel.getDescription(), travel.getPrice(), travel.getSpaceLeft(), travel.getTransportation(), travel.getImageURL());
+    }
+
+    private Travel mapCommandToTravel(TravelCommand command) {
+        return new Travel(command.getTravelName(), command.getShortDescription(), command.getDescription(), command.getPrice(), command.getSpaceLeft(), command.getTransportation(), command.getImageURL());
     }
 }

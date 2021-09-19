@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -21,6 +22,7 @@ const StyledUl = styled.ul`
   width: 50%;
   margin-bottom: 0;
   list-style: none;
+  font-size: 120%;
 `;
 
 const liStyle = {
@@ -35,12 +37,17 @@ const linkStyle = {
 };
 
 const Header = ({ currentUser }) => {
+  const token = localStorage.getItem("token");
+  let user;
+  if (token) {
+    user = jwtDecode(token);
+  }
   return (
     <StyledHeader className="p-3">
       <StyledContainer className="d-flex container">
         <h1>
-          <Link style={linkStyle} to="/travels">
-            Travel
+          <Link style={linkStyle} to="/">
+            Travel Buddy
           </Link>
         </h1>
 
@@ -62,14 +69,25 @@ const Header = ({ currentUser }) => {
               </Link>
             </li>
           )}
-          {currentUser && (
+          {user?.auth === "ROLE_USER" && (
             <li style={liStyle}>
               <Link style={linkStyle} to="/profile">
                 My profile
               </Link>
             </li>
           )}
-          <li style={liStyle}>Agencies</li>
+          {user?.auth === "ROLE_ADMIN" && (
+            <li style={liStyle}>
+              <Link style={linkStyle} to="/admin/new">
+                Add travel
+              </Link>
+            </li>
+          )}
+          <li style={liStyle}>
+            <Link style={linkStyle} to="/travels">
+              Travels
+            </Link>
+          </li>
         </StyledUl>
       </StyledContainer>
     </StyledHeader>
