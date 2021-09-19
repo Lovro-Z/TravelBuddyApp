@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import * as Yup from "yup";
 
@@ -15,6 +15,14 @@ const CardGrid = styled.div`
 
 const Profile = () => {
   const [user, setUser] = useState(null);
+  const history = useHistory();
+  let travel;
+
+  if (user) {
+    if (user.travel) {
+      travel = user.travel;
+    }
+  }
 
   useEffect(() => {
     fetchUser();
@@ -136,25 +144,37 @@ const Profile = () => {
       <hr />
       <h3 className="mb-4">Your travels</h3>
 
-      {user?.username === "johndoe" ? (
+      {travel ? (
         <CardGrid>
           <Card>
             <Card.Img
               variant="top"
-              src="https://static.independent.co.uk/2021/03/11/13/iStock-1185953092.jpg?width=982&height=726&auto=webp&quality=75"
+              src={travel.imageURL}
               style={{ height: "218px" }}
             />
             <Card.Body>
-              <Card.Title>Travel to France</Card.Title>
-              <Card.Text>
-                Travel to one of the most famous and romantic countries in
-                Europe, la France!
+              <Card.Title>{travel.travelName}</Card.Title>
+              <Card.Text>{travel.shortDescription}</Card.Text>
+              <Card.Text style={{ color: "gray" }}>
+                {travel.price} | {travel.transportation === "BUS" && "  🚌"}
+                {travel.transportation === "PLANE" && "  ✈️"}
+                {travel.transportation === "TRAIN" && "  🚂"}
               </Card.Text>
-              <Card.Text style={{ color: "gray" }}>1300€ | 🚌</Card.Text>
-              <Link to={`localhost:3000/5`}>
+              <Link to={`travels/${travel.id}`}>
                 <button className="btn btn-primary mr-3">Read more</button>
               </Link>
-              <button className="btn btn-danger">Cancel reservation</button>
+              {user && (
+                <button
+                  onClick={() =>
+                    userService
+                      .cancelTravel(user.id)
+                      .then(history.push("/travels"))
+                  }
+                  className="btn btn-danger"
+                >
+                  Cancel reservation
+                </button>
+              )}
             </Card.Body>
           </Card>
         </CardGrid>

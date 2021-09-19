@@ -1,6 +1,7 @@
 package hr.zubcic.travelapp.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Travel {
@@ -43,6 +44,9 @@ public class Travel {
 
     @Column(name = "image_url")
     private String imageURL;
+
+    @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL)
+    private List<User> users;
 
     public Long getId() {
         return id;

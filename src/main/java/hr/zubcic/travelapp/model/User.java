@@ -42,6 +42,10 @@ public class User implements Serializable {
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "travel_id")
+    private Travel travel;
+
     public Long getId() {
         return id;
     }
@@ -88,5 +92,13 @@ public class User implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Travel getTravel() {
+        return travel;
+    }
+
+    public void setTravel(Travel travel) {
+        this.travel = travel;
     }
 }

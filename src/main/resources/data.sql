@@ -36,12 +36,12 @@ values (104, 'Travel to Japan', 'Travel to one of the oldest, modern and famous 
 insert into travel(id, travel_name, short_description, description, price, space_left, transportation, image_url)
 values (105, 'Travel to Croatia', 'Travel to one of the most beautiful, historic and magnificent countries in Europe, Croatia!', 'test', 1100, 80, 'TRAIN', 'https://assets.wego.com/image/upload/v1611848131/country-pages/hr.jpg');
 
-insert into user (id, username, password, first_name, last_name)
-values (100, 'admin', '$2y$12$AM/KtV8okcnktxMv/enj.u5GwAHAST1xTtEXwZEfx9k/UrbfMMo2u', 'admin', 'admin');
+insert into user (id, username, password, first_name, last_name, travel_id)
+values (100, 'admin', '$2y$12$AM/KtV8okcnktxMv/enj.u5GwAHAST1xTtEXwZEfx9k/UrbfMMo2u', 'admin', 'admin', 101);
 insert into user (id, username, password, first_name, last_name)
 values (101, 'user', '$2y$12$r18Tw1bZ8M6Jk0.fl811DOwxeymmq0OKhKpJSpGSgSwpdWW.hsL7K', 'user', 'user');
-insert into user (id, username, password, first_name, last_name)
-values (102, 'updater', '$2y$12$K02IMU2RYpATgieuq/JINevJ55J74XOWuMN0pfT/CD3n4KBb133ZO', 'updater', 'updater');
+insert into user (id, username, password, first_name, last_name, travel_id)
+values (102, 'updater', '$2y$12$K02IMU2RYpATgieuq/JINevJ55J74XOWuMN0pfT/CD3n4KBb133ZO', 'updater', 'updater', 102);
 insert into authority (id, name)
 values (1, 'ROLE_ADMIN');
 insert into authority (id, name)

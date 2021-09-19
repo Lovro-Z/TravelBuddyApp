@@ -1,5 +1,7 @@
 package hr.zubcic.travelapp.dto;
 
+import hr.zubcic.travelapp.model.Travel;
+
 import java.util.Set;
 
 public class UserDTO {
@@ -13,6 +15,8 @@ public class UserDTO {
     private String lastName;
 
     private Set<String> authorities;
+
+    private Travel travel;
 
     public UserDTO() {
     }
@@ -55,5 +59,13 @@ public class UserDTO {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public Travel getTravel() {
+        return travel;
+    }
+
+    public void setTravel(Travel travel) {
+        this.travel = travel;
     }
 }
