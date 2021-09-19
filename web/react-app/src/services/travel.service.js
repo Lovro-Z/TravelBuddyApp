@@ -3,6 +3,7 @@ import { authenticationService } from "./authentication.service";
 let requestURL = "http://localhost:8080/travel";
 
 const filterTravels = (text, price, transportation) => {
+  let requestURL = "http://localhost:8080/travel";
   if (text) {
     requestURL += `?text=${text}&`;
   }

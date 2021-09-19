@@ -43,8 +43,50 @@ const updateUser = (id, username, password, firstName, lastName) => {
     });
 };
 
+const bookTravel = (id, travelId) => {
+  const currentUser = localStorage.getItem("token");
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${currentUser}`,
+    },
+  };
+
+  return fetch(
+    `${authenticationService.apiUrl}/api/user/book/${id}?travelId=${travelId}`,
+    requestOptions
+  )
+    .then(authenticationService.handleResponse)
+    .then((user) => {
+      return user;
+    });
+};
+
+const cancelTravel = (id) => {
+  const currentUser = localStorage.getItem("token");
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${currentUser}`,
+    },
+  };
+
+  return fetch(
+    `${authenticationService.apiUrl}/api/user/cancel/${id}`,
+    requestOptions
+  )
+    .then(authenticationService.handleResponse)
+    .then((user) => {
+      return user;
+    });
+};
+
 export const userService = {
   getUser,
   addUser,
   updateUser,
+  bookTravel,
+  cancelTravel,
 };

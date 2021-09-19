@@ -14,7 +14,9 @@ create table if not exists `user` (
     username varchar(100) not null,
     password varchar(250) not null,
     first_name varchar(250) not null,
-    last_name varchar(250) not null
+    last_name varchar(250) not null,
+    travel_id bigint,
+    constraint fk_travel foreign key (travel_id) references travel(id)
 );
 
 create table if not exists authority (
@@ -28,4 +30,3 @@ create table if not exists user_authority (
     constraint fk_user foreign key (user_id) references user(id),
     constraint fk_authority foreign key (authority_id) references authority(id)
 );
-

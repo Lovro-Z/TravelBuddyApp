@@ -60,4 +60,21 @@ public class UserController {
                 );
     }
 
+    @PutMapping("/book/{id}")
+    public ResponseEntity<UserDTO> bookTravel(@PathVariable Long id, @RequestParam Long travelId) {
+        return userService.bookTravel(id, travelId)
+                .map(ResponseEntity::ok)
+                .orElseGet(
+                        () -> ResponseEntity.notFound().build()
+                );
+    }
+
+    @PutMapping("/cancel/{id}")
+    public ResponseEntity<UserDTO> cancelTravel(@PathVariable Long id) {
+        return userService.cancelTravel(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(
+                        () -> ResponseEntity.notFound().build()
+                );
+    }
 }
