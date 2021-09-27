@@ -17,13 +17,14 @@ const authHeader = () => {
 // Response handler
 const handleResponse = (response) => {
   return response.text().then((text) => {
+    if (text === "Username already exists") {
+      return Promise.reject("Username already exists");
+    }
     const data = text && JSON.parse(text);
     if (!response.ok) {
       if ([401, 403].indexOf(response.status) !== -1) {
         logout();
-        // window.location.reload();
       }
-      // TODO: handle bad username already exists response
       if (data?.apierror?.message === "Bad credentials") {
         return Promise.reject("Incorrect username or password");
       }
