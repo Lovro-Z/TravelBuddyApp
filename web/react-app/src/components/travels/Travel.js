@@ -32,6 +32,17 @@ const Travel = () => {
     setTravel(travel);
   }, [id]);
 
+  const bookTravel = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      history.push("/login");
+    } else {
+      await userService
+        .bookTravel(user.id, travel.id)
+        .then(() => history.push("/profile"));
+    }
+  };
+
   useEffect(() => {
     fetchTravel();
     fetchUser();
@@ -47,15 +58,7 @@ const Travel = () => {
       <p>{travel.description}</p>
       <hr />
       <p>Price: {travel.price}€</p>
-      {console.log(user)}
-      <button
-        onClick={() => {
-          userService
-            .bookTravel(user.id, travel.id)
-            .then(history.push("/profile"));
-        }}
-        className="btn btn-success mr-2"
-      >
+      <button onClick={() => bookTravel()} className="btn btn-success mr-2">
         Book travel
       </button>
       <Link to="/travels" className="btn btn-primary">
