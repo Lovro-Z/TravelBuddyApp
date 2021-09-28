@@ -44,9 +44,9 @@ const Profile = () => {
       <h3>Your personal information</h3>
       <Formik
         initialValues={{
-          username: user?.username,
-          firstName: user?.firstName,
-          lastName: user?.lastName,
+          username: user?.username || "",
+          firstName: user?.firstName || "",
+          lastName: user?.lastName || "",
         }}
         validationSchema={Yup.object().shape({
           username: Yup.string().required("Username is required"),
@@ -181,7 +181,7 @@ const Profile = () => {
       ) : (
         <>
           <p>You currently don't have any travels.</p>
-          <Link to="/travels" class="btn btn-success">
+          <Link to="/travels" className="btn btn-success">
             Search travels
           </Link>
         </>

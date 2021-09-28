@@ -17,13 +17,12 @@ const Travel = () => {
   const history = useHistory();
 
   const [travel, setTravel] = useState([]);
-  const [user, setUser] = useState(null);
 
   const fetchUser = async () => {
     const fetchedUser = await userService.getUser();
     const user = await fetchedUser;
 
-    setUser(user);
+    return user;
   };
 
   const fetchTravel = useCallback(async () => {
@@ -37,15 +36,14 @@ const Travel = () => {
     if (!token) {
       history.push("/login");
     } else {
-      await userService
-        .bookTravel(user.id, travel.id)
+      await fetchUser()
+        .then(async (user) => await userService.bookTravel(user.id, travel.id))
         .then(() => history.push("/profile"));
     }
   };
 
   useEffect(() => {
     fetchTravel();
-    fetchUser();
   }, [fetchTravel]);
 
   return (

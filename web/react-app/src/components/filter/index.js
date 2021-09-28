@@ -22,7 +22,7 @@ const Filter = ({ setTravels }) => {
     <Formik
       initialValues={{
         text: "",
-        price: 0,
+        price: "",
         transportation: "",
       }}
       onSubmit={({ text, price, transportation }, { setSubmitting }) => {

@@ -35,7 +35,14 @@ const TravelItem = ({ travel, deleteTravel }) => {
               <Button variant="warning">Edit travel</Button>
             </Link>
             <Button
-              onClick={() => deleteTravel(travel.id)}
+              onClick={() => {
+                const promptResult = window.confirm(
+                  "Are you sure you want to delete this travel?"
+                );
+                if (promptResult) {
+                  deleteTravel(travel.id);
+                }
+              }}
               variant="danger"
               className="ml-2"
             >
