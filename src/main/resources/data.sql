@@ -12,10 +12,30 @@ we recommend to visit in your free time. Free time for your own content. Departu
             'https://assets.wego.com/image/upload/v1611848131/country-pages/es.jpg');
 
 insert into travel(id, travel_name, short_description, description, price, space_left, transportation, image_url)
-    values (101, 'Travel to Germany', 'Travel to one of the most famous countries in Europe, the glorious Germany!', 'test', 1000, 80, 'BUS', 'https://www.travelsafe-abroad.com/wp-content/uploads/1500-ss-large-rothenburg-121494922.jpg');
+    values (101, 'Travel to Germany', 'Travel to one of the most famous countries in Europe, the glorious Germany!', 'Departure from Zagreb at 05:00 from the Bus Station,
+platforms 502-506. This is followed by a drive through Slovenia, Austria and Germany with short stops along the way. Upon arrival in Strasbourg, the capital of the French
+region of Alsace, we will pass by the European Parliament. City tour: Notre Dame Cathedral, Guthenberg Square, Church of St. Tome, bridges over the ILL River, Little France
+district. We suggest dinner in the most picturesque part of old Strasbourg with colorful wooden buildings dating back to the 16th century. Accommodation in a hotel near the
+German-French border. Overnight stay.
+Breakfast. Drive to Paris. Upon arrival in Paris, a panoramic tour of the city and a ride along the famous Avenue Champs-Elysees and hotel accommodation. After a short break
+departure with the tour guide by public transport to one of the most beautiful streets in the world, the Champs-Elysees. Stroll along the beautifully lit famous avenue with
+sumptuous shop windows and picturesque Parisian bistros and restaurants to the Arc de Triomphe. Free time. Possibility to go to the Eiffel Tower, which has been the title
+of the most famous symbol of Paris for 125 years. In agreement with the tour guide, the possibility of climbing the elevator to the top or on foot to the 2nd floor
+(further by elevator) and enjoying the view of the city from a height of 324 m (purchase tickets individually, on the spot or earlier online). Return to the hotel.
+Overnight stay.', 1000, 80, 'BUS', 'https://www.travelsafe-abroad.com/wp-content/uploads/1500-ss-large-rothenburg-121494922.jpg');
 
 insert into travel(id, travel_name, short_description, description, price, space_left, transportation, image_url)
-    values (102, 'Travel to England', 'Travel to one of the most famous and oldest countries in Europe, the noble England!', 'test', 1600, 50, 'PLANE', 'https://media.nomadicmatt.com/englandguide.jpg');
+    values (102, 'Travel to England', 'Travel to one of the most famous and oldest countries in Europe, the noble England!', 'Departure from Zagreb at 05:00 from the Bus Station,
+platforms 502-506. This is followed by a drive through Slovenia, Austria and Germany with short stops along the way. Upon arrival in Strasbourg, the capital of the French
+region of Alsace, we will pass by the European Parliament. City tour: Notre Dame Cathedral, Guthenberg Square, Church of St. Tome, bridges over the ILL River, Little France
+district. We suggest dinner in the most picturesque part of old Strasbourg with colorful wooden buildings dating back to the 16th century. Accommodation in a hotel near the
+German-French border. Overnight stay.
+Breakfast. Drive to Paris. Upon arrival in Paris, a panoramic tour of the city and a ride along the famous Avenue Champs-Elysees and hotel accommodation. After a short break
+departure with the tour guide by public transport to one of the most beautiful streets in the world, the Champs-Elysees. Stroll along the beautifully lit famous avenue with
+sumptuous shop windows and picturesque Parisian bistros and restaurants to the Arc de Triomphe. Free time. Possibility to go to the Eiffel Tower, which has been the title
+of the most famous symbol of Paris for 125 years. In agreement with the tour guide, the possibility of climbing the elevator to the top or on foot to the 2nd floor
+(further by elevator) and enjoying the view of the city from a height of 324 m (purchase tickets individually, on the spot or earlier online). Return to the hotel.
+Overnight stay.', 1600, 50, 'PLANE', 'https://media.nomadicmatt.com/englandguide.jpg');
 
 insert into travel(id, travel_name, short_description, description, price, space_left, transportation, image_url)
     values (103, 'Travel to France', 'Travel to one of the most famous and romantic countries in Europe, la France!', 'Departure from Zagreb at 05:00 from the Bus Station,
@@ -31,10 +51,30 @@ of the most famous symbol of Paris for 125 years. In agreement with the tour gui
 Overnight stay.', 1300, 70, 'BUS', 'https://static.independent.co.uk/2021/03/11/13/iStock-1185953092.jpg?width=982&height=726&auto=webp&quality=75');
 
 insert into travel(id, travel_name, short_description, description, price, space_left, transportation, image_url)
-values (104, 'Travel to Japan', 'Travel to one of the oldest, modern and famous countries in the world, Japan!', 'test', 2700, 65, 'PLANE', 'https://theasiacollective.com/wp-content/uploads/2018/06/Feature-Photo-1-e1530688449976.png');
+values (104, 'Travel to Japan', 'Travel to one of the oldest, modern and famous countries in the world, Japan!', 'Departure from Zagreb at 05:00 from the Bus Station,
+platforms 502-506. This is followed by a drive through Slovenia, Austria and Germany with short stops along the way. Upon arrival in Strasbourg, the capital of the French
+region of Alsace, we will pass by the European Parliament. City tour: Notre Dame Cathedral, Guthenberg Square, Church of St. Tome, bridges over the ILL River, Little France
+district. We suggest dinner in the most picturesque part of old Strasbourg with colorful wooden buildings dating back to the 16th century. Accommodation in a hotel near the
+German-French border. Overnight stay.
+Breakfast. Drive to Paris. Upon arrival in Paris, a panoramic tour of the city and a ride along the famous Avenue Champs-Elysees and hotel accommodation. After a short break
+departure with the tour guide by public transport to one of the most beautiful streets in the world, the Champs-Elysees. Stroll along the beautifully lit famous avenue with
+sumptuous shop windows and picturesque Parisian bistros and restaurants to the Arc de Triomphe. Free time. Possibility to go to the Eiffel Tower, which has been the title
+of the most famous symbol of Paris for 125 years. In agreement with the tour guide, the possibility of climbing the elevator to the top or on foot to the 2nd floor
+(further by elevator) and enjoying the view of the city from a height of 324 m (purchase tickets individually, on the spot or earlier online). Return to the hotel.
+Overnight stay.', 2700, 65, 'PLANE', 'https://theasiacollective.com/wp-content/uploads/2018/06/Feature-Photo-1-e1530688449976.png');
 
 insert into travel(id, travel_name, short_description, description, price, space_left, transportation, image_url)
-values (105, 'Travel to Croatia', 'Travel to one of the most beautiful, historic and magnificent countries in Europe, Croatia!', 'test', 1100, 80, 'TRAIN', 'https://assets.wego.com/image/upload/v1611848131/country-pages/hr.jpg');
+values (105, 'Travel to Croatia', 'Travel to one of the most beautiful, historic and magnificent countries in Europe, Croatia!', 'Departure from Zagreb at 05:00 from the Bus Station,
+platforms 502-506. This is followed by a drive through Slovenia, Austria and Germany with short stops along the way. Upon arrival in Strasbourg, the capital of the French
+region of Alsace, we will pass by the European Parliament. City tour: Notre Dame Cathedral, Guthenberg Square, Church of St. Tome, bridges over the ILL River, Little France
+district. We suggest dinner in the most picturesque part of old Strasbourg with colorful wooden buildings dating back to the 16th century. Accommodation in a hotel near the
+German-French border. Overnight stay.
+Breakfast. Drive to Paris. Upon arrival in Paris, a panoramic tour of the city and a ride along the famous Avenue Champs-Elysees and hotel accommodation. After a short break
+departure with the tour guide by public transport to one of the most beautiful streets in the world, the Champs-Elysees. Stroll along the beautifully lit famous avenue with
+sumptuous shop windows and picturesque Parisian bistros and restaurants to the Arc de Triomphe. Free time. Possibility to go to the Eiffel Tower, which has been the title
+of the most famous symbol of Paris for 125 years. In agreement with the tour guide, the possibility of climbing the elevator to the top or on foot to the 2nd floor
+(further by elevator) and enjoying the view of the city from a height of 324 m (purchase tickets individually, on the spot or earlier online). Return to the hotel.
+Overnight stay.', 1100, 80, 'TRAIN', 'https://assets.wego.com/image/upload/v1611848131/country-pages/hr.jpg');
 
 insert into user (id, username, password, first_name, last_name, travel_id)
 values (100, 'admin', '$2y$12$AM/KtV8okcnktxMv/enj.u5GwAHAST1xTtEXwZEfx9k/UrbfMMo2u', 'admin', 'admin', 101);
