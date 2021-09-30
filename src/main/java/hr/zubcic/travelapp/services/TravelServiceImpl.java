@@ -63,7 +63,7 @@ public class TravelServiceImpl implements TravelService {
     @Override
     public List<TravelDTO> filterTravels(String text, Double price, TransportType transportation) {
         return travelRepository.findAll().stream()
-                .filter(travel -> (text == null || (!text.isBlank()) && (travel.getTravelName().contains(text) || travel.getShortDescription().contains(text) || travel.getDescription().contains(text))))
+                .filter(travel -> (text == null || (!text.isBlank()) && (travel.getTravelName().toLowerCase().contains(text.toLowerCase()) || travel.getShortDescription().toLowerCase().contains(text.toLowerCase()) || travel.getDescription().toLowerCase().contains(text.toLowerCase()))))
                 .filter(travel -> (price == null) || (price > 0 && travel.getPrice() <= price))
                 .filter(travel -> ((transportation == null) || (transportation.equals(travel.getTransportation()))))
                 .map(this::mapTravelToDTO)

@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -17,6 +18,12 @@ const Travel = () => {
   const history = useHistory();
 
   const [travel, setTravel] = useState([]);
+
+  const token = localStorage.getItem("token");
+  let userFromJwt;
+  if (token) {
+    userFromJwt = jwtDecode(token);
+  }
 
   const fetchUser = async () => {
     const fetchedUser = await userService.getUser();
@@ -56,9 +63,22 @@ const Travel = () => {
       <p>{travel.description}</p>
       <hr />
       <p>Price: {travel.price}€</p>
-      <button onClick={() => bookTravel()} className="btn btn-success mr-2">
-        Book travel
-      </button>
+      {userFromJwt?.auth !== "ROLE_ADMIN" && (
+        <>
+          {travel.id === 100 && travel.spaceLeft < 75 ? (
+            <button disabled="disabled" className="btn btn-secondary mr-2">
+              Travel already booked
+            </button>
+          ) : (
+            <button
+              onClick={() => bookTravel()}
+              className="btn btn-success mr-2"
+            >
+              Book travel
+            </button>
+          )}
+        </>
+      )}
       <Link to="/travels" className="btn btn-primary">
         Back
       </Link>
